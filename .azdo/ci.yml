@@ -16,7 +16,7 @@ schedules:
 pr:
   branches:
     include:
-    - master
+    - main
 
 variables:
   - group: tfectl
