@@ -1,0 +1,57 @@
+name: $(Rev:r)
+
+pool:
+  vmImage: ubuntu-20.04
+
+trigger: none
+
+schedules:
+  - cron: 0 7,19 * * *
+    displayName: daily 
+    branches:
+      include:
+        - main
+    always: true
+
+pr:
+  branches:
+    include:
+    - master
+
+variables:
+  - group: tfectl
+
+steps:
+  - bash: |
+      #!/usr/bin/env bash
+      # set PATH
+      export CODEQL_PATH=$(find /opt/hostedtoolcache/CodeQL/* -maxdepth 0 -type d)
+      echo "##vso[task.setvariable variable=PATH]${PATH}:$CODEQL_PATH/x64/codeql"
+
+  - bash: |
+      #!/usr/bin/env bash
+      ## validate codeql
+      codeql version
+      codeql resolve languages
+      codeql resolve qlpacks
+    displayName: "Validate CodeQL installation"
+
+  - bash: |
+      #!/usr/bin/env bash
+      mkdir /tmp/codeql/
+      codeql database create /tmp/codeql/ --language=go --overwrite --source-root $(Build.SourcesDirectory)
+    displayName: "Create CodeQL DB"
+
+  - bash: |
+      #!/usr/bin/env bash
+      cd /opt/hostedtoolcache/CodeQL/*/x64/codeql
+      find . -name go-security-and-quality.qls -exec codeql database analyze /tmp/codeql {} --format sarif-latest --output $(Build.SourcesDirectory)/codeql-output.sarif --sarif-category go --threads 0 \;
+    displayName: "Analyze CodeQL DB"
+
+  - bash: |
+      #!/usr/bin/env bash
+      codeql github upload-results --sarif codeql-output.sarif --ref ${REF}
+    displayName: "Upload to Github"
+    env:
+      REF: $(Build.SourceBranch)
+      GITHUB_TOKEN: $(githubToken)
