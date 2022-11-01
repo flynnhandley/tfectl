@@ -8,9 +8,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Version is used by the build system.
-var Version string
-
 // The log flag value.
 var l string
 
