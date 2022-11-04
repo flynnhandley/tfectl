@@ -48,7 +48,7 @@ var runQueueCmd = &cobra.Command{
 		for _, workspace := range workspaces {
 			var tmpRun Run
 
-			log.Debugf("Queuing run on %s", workspace)
+			log.Debugf("Queuing run on %s", workspace.Name)
 			run, err := queueRun(client, organization, workspace)
 			check(err)
 

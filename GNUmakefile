@@ -16,6 +16,9 @@ fmt:
 	@echo "==> Formatting code <=="
 	find . -name '*.go' | grep -v vendor | xargs gofmt -s -w
 
+fmtcheck:
+	@sh -c "'$(CURDIR)/scripts/fmtcheck.sh'"
+
 build: linux windows
 
 linux:
@@ -23,3 +26,7 @@ linux:
 
 windows:
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags '-extldflags "-static"' -o bin/tfectl_win_x86_64
+
+test:
+	@echo "==> Testing <=="
+	cd cmd/ && go test -v

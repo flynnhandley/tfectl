@@ -71,13 +71,12 @@ Use "tfectl [command] --help" for more information about a command.
 ```
 
 ### Workspace
-* `go run main.go` can be replaced with the `tfectl` command have the binary built/copied on your system
 * #### List
   * Run with no arguments returns workspaceName and workspaceID for all workspaces in org
   * Run with `--filter`
  
   ```bash
-    $ go run main.go workspace list --filter workspace-1
+    $ tfectl workspace list --filter workspace-1
     [
       {
         "name": "workspace-1",
@@ -92,7 +91,7 @@ Use "tfectl [command] --help" for more information about a command.
   * Run with `--detail`
  
   ```bash 
-    $ go run main.go workspace list --filter workspace-1 --detail
+    $ tfectl workspace list --filter workspace-1 --detail
     [
       {
         "name": "workspace-1",
@@ -110,7 +109,7 @@ Use "tfectl [command] --help" for more information about a command.
   * Run with a comma-separated string of workspaceIDs or a workspaceName filter (mutually exclusive)
 
   ```bash
-    $ go run main.go workspace lock --ids ws-SxWNNcYPkLD48ZC7
+    $ tfectl workspace lock --ids ws-SxWNNcYPkLD48ZC7
     [
       {
         "id": "ws-SxWNNcYPkLD48ZC7",
@@ -122,7 +121,7 @@ Use "tfectl [command] --help" for more information about a command.
 
   * Operation can be run against a workspace that is already locked
   ```bash
-    $ go run main.go workspace lock --filter dev-workspace
+    $ tfectl workspace lock --filter dev-workspace
     [
       {
         "id": "ws-5xUNCXVKrryoPcEp",
@@ -137,7 +136,7 @@ Use "tfectl [command] --help" for more information about a command.
   * Locks/Unlocks all workspaces in the specified org
 
   ```bash
-    $ go run main.go workspace lockall
+    $ tfectl workspace lockall
     [
       {
         "id": "ws-SxWNNcYPkLD48ZC7",
@@ -167,7 +166,7 @@ Use "tfectl [command] --help" for more information about a command.
   * Bulk queue plans against one or many workspaces
  
   ```bash
-    $ go run main.go run queue --filter workspace-sandbox
+    $ tfectl run queue --filter workspace-sandbox
     [
       {
         "id": "run-pX9Lrq5KCrsgCYFH",
@@ -182,7 +181,7 @@ Use "tfectl [command] --help" for more information about a command.
   * Apply pending plans - takes a comma-separated-string of runIDs
 
   ```bash
-    $ go run main.go run apply --ids run-UowKQd1cF7bgNfCp
+    $ tfectl run apply --ids run-UowKQd1cF7bgNfCp
     [
       {
         "id": "run-UowKQd1cF7bgNfCp",
@@ -197,7 +196,7 @@ Use "tfectl [command] --help" for more information about a command.
   * Query/Get run-details from runIDs
 
   ```bash
-    $ go run main.go run get --ids run-UowKQd1cF7bgNfCp
+    $ tfectl run get --ids run-UowKQd1cF7bgNfCp
     [
       {
         "id": "run-UowKQd1cF7bgNfCp",
@@ -211,7 +210,7 @@ Use "tfectl [command] --help" for more information about a command.
 * CRUD operations on workspace variables
 * #### Query/List workspace variables
   ```bash
-    $ go run main.go variable list --workspace-filter workspace-sandbox
+    $ tfectl variable list --workspace-filter workspace-sandbox
     [
       {
         "workspace_id": "ws-DpeRu7KpazXEWKoJ",
@@ -260,7 +259,7 @@ Use "tfectl [command] --help" for more information about a command.
 
 * #### Create new workspace variable
   ```bash
-    $ go run main.go variable create --workspace-id ws-DpeRu7KpazXEWKoJ --description "test" --key "testCLI" --value "testCLI value" --sensitive true --type terraform --hcl
+    $ tfectl variable create --workspace-id ws-DpeRu7KpazXEWKoJ --description "test" --key "testCLI" --value "testCLI value" --sensitive true --type terraform --hcl
     {
       "id": "var-uCgZrzkPhis6qXTS",
       "key": "testCLI",
@@ -273,7 +272,7 @@ Use "tfectl [command] --help" for more information about a command.
 	```
 * #### Update existing workspace variable
 	```bash
-    $ go run main.go variable update --variable-id var-uCgZrzkPhis6qXTS --workspace-id ws-DpeRu7KpazXEWKoJ --value "test CLI Value 2" --key "testCLI" --hcl --sensitive true
+    $ tfectl variable update --variable-id var-uCgZrzkPhis6qXTS --workspace-id ws-DpeRu7KpazXEWKoJ --value "test CLI Value 2" --key "testCLI" --hcl --sensitive true
     {
       "id": "var-uCgZrzkPhis6qXTS",
       "key": "testCLI",
@@ -286,7 +285,7 @@ Use "tfectl [command] --help" for more information about a command.
 	```
 * #### Delete existing workspace variable
 	```bash
-    $ go run main.go variable delete --variable-id var-uCgZrzkPhis6qXTS --workspace-id ws-DpeRu7KpazXEWKoJ
+    $ tfectl variable delete --variable-id var-uCgZrzkPhis6qXTS --workspace-id ws-DpeRu7KpazXEWKoJ
     # Returns current variables (similar to variable list)
     [
       {
@@ -336,7 +335,7 @@ Use "tfectl [command] --help" for more information about a command.
 
 * #### Create variables from file
 	```bash
-    $ go run main.go variable create from-file --file variables.json --workspace-id ws-DpeRu7KpazXEWKoJ
+    $ tfectl variable create from-file --file variables.json --workspace-id ws-DpeRu7KpazXEWKoJ
     [
       {
         "id": "var-oDNV14eJf9ijjcc2",

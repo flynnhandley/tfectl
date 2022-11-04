@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	log "github.com/sirupsen/logrus"
@@ -13,27 +12,26 @@ var l string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:     "tfectl",
-	Short:   "Query TFE from the command line.",
-	Long:    `Query TFE from the command line.`,
-	Version: "v1.0.0",
-	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		cmd.SilenceErrors = true
-		cmd.SilenceUsage = true
-		if err := setUpLogs(l); err != nil {
-			return err
-		}
-		return nil
-	},
+	Use:               "tfectl",
+	Short:             "Query TFE from the command line.",
+	Long:              `Query TFE from the command line.`,
+	Version:           "v1.0.0",
+	PersistentPreRunE: RunRootCmd,
+}
+
+func RunRootCmd(cmd *cobra.Command, args []string) error {
+	cmd.SilenceErrors = true
+	cmd.SilenceUsage = true
+	if err := setUpLogs(l); err != nil {
+		return err
+	}
+	return nil
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	cobra.CheckErr(rootCmd.Execute())
 }
 
 func init() {

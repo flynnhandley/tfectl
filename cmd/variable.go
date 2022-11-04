@@ -497,7 +497,7 @@ func deleteVariable(client *tfe.Client, workspaceID string, variableID string) e
 	return err
 }
 
-func readJsonFile(file string) ([]byte) {
+func readJsonFile(file string) []byte {
 	jsonFile, err := os.Open(file)
 	check(err)
 

@@ -1,0 +1,23 @@
+name: $(Rev:r)
+
+pool:
+  vmImage: ubuntu-20.04
+
+trigger: none
+
+pr: 
+  branches:
+    include:
+      - master
+      - main
+
+steps:
+  - bash: |
+      #!/usr/bin/env bash
+      make fmtcheck
+    displayName: "Check formatting"
+
+  - bash: |
+      #!/usr/bin/env bash
+      make build
+    displayName: "Build"
