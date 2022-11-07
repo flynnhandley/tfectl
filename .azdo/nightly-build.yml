@@ -1,0 +1,14 @@
+name: $(Rev:r)
+
+pool:
+  vmImage: ubuntu-20.04
+
+schedules:
+  - cron: "0 0 * * *"
+    displayName: "Nightly Build"
+    branches:
+      include:
+        - 'main'
+
+steps:
+  - template: templates/ci.yml

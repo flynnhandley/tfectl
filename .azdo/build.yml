@@ -12,12 +12,4 @@ pr:
       - main
 
 steps:
-  - bash: |
-      #!/usr/bin/env bash
-      make fmtcheck
-    displayName: "Check formatting"
-
-  - bash: |
-      #!/usr/bin/env bash
-      make build
-    displayName: "Build"
+  - template: templates/ci.yml
