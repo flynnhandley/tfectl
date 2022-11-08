@@ -1,11 +1,6 @@
 # tfectl
 * CLI Utility to query/manage TFE based on [tfe-cli](https://github.com/rgreinho/tfe-cli)
 
-## Requirements
-* go 1.17+
-* go-tfe
-* sp13/cobra
-
 ## Setup
 * Copy the binary (either Windows or Linux) to a path on your machine. Add the `.exe` extension if using it on Windows
   ```ps
@@ -373,3 +368,6 @@ Use "tfectl [command] --help" for more information about a command.
 ```bash
   $ CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags '-extldflags "-static"' -o tfectl_win_x86_64
 ```
+
+## Contributing
+* see `CONTRIBUTING.md`
