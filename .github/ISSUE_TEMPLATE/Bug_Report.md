@@ -1,4 +1,4 @@
-(!) BUG REPORT (!)
+## BUG REPORT :warning:
 <!--- Report a BUG if something isn't working right --->
 
 ### Community note
