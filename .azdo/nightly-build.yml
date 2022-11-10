@@ -3,6 +3,9 @@ name: $(Rev:r)
 pool:
   vmImage: ubuntu-20.04
 
+trigger: none
+pr: none
+
 schedules:
   - cron: "0 0 * * *"
     displayName: "Nightly Build"
